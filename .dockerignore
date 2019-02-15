@@ -1,2 +1,6 @@
 .dockerignore
 .gitignore
+docker-compose.yml
+jupyter_notebook_config.py
+README.md
+start.sh

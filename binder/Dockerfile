@@ -1,12 +1,7 @@
-# Set the base image to beakerx
-FROM beakerx/beakerx:1.3.0
+# Set the base image to jupyter
+FROM jupyter/minimal-notebook:45b8529a6bfc
 
-USER root
+RUN conda config --env --add pinned_packages 'openjdk>8.0.121'
+RUN conda install -y -c conda-forge pandas=0.24.1 beakerx=1.3.0 ipywidgets=7.4.2 matplotlib && conda clean -y --all
 
-RUN conda install -n beakerx -c conda-forge cvxpy=1.0.14 matplotlib
-
-
-COPY ./books ${HOME}/books
-
-# set the user back to NB_USER defined in Dockerfile for beakerx/beakerx
-USER ${NB_USER}
+COPY ./books ${HOME}/work

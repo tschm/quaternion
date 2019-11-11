@@ -1,7 +1,4 @@
 # Set the base image to jupyter
-FROM lobnek/jupyter:v2.8
+FROM tschm/docker:release-0.6
 
-# I am reluctant to use conda install here, as conda updates tornado which will break beakerx
-RUN pip install --no-cache-dir matplotlib==3.0.3
-
-COPY --chown=beakerx:beakerx ./work $WORK
+COPY --chown=jovyan:100 ./work /home/jovyan/work

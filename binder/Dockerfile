@@ -1,4 +1,5 @@
 # Set the base image to jupyter
-FROM tschm/docker:release-0.6
+FROM tschm/jupyter:1.0.0 as jupyter
+
 
 COPY --chown=jovyan:100 ./work /home/jovyan/work

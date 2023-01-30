@@ -3,5 +3,5 @@
 format: jb-book
 root: docs/index
 chapters:
-    - file: docs/notebooks/Experiment1
-    - file: docs/notebooks/Experiment2
+    - file: docs/notebooks/Rotation2d
+    - file: docs/notebooks/Rotation3d

@@ -19,6 +19,7 @@ jobs:
       run: |
         pip install -r requirements.txt
         pip install jupyter-book
+    
     - name: Clean Font-Manager
       run: |
         sudo echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
@@ -27,6 +28,7 @@ jobs:
         rm ~/.cache/matplotlib -fr
         fc list
         fc-match Arial 
+    
     - name: Install the kernel
       run: |
         ipython kernel install --name "quaternion" --user
@@ -36,7 +38,6 @@ jobs:
       run: |
         jupyter-book clean book
         jupyter-book build book
-        cp -r book/_build/html ./docs
     
     # Push the book's HTML to github-pages
     - name: GitHub Pages action

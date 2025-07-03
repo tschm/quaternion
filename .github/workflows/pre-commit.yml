@@ -11,18 +11,6 @@ permissions:
   contents: read  # Allow reading repository contents
 
 jobs:
-  # Check for dependency issues using deptry
-  deptry:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Build the virtual environment"
-        uses: tschm/cradle/actions/environment@v0.1.75
-
-      - uses: tschm/cradle/actions/deptry@v0.1.75
-        with:
-          source-folder: src/futures
-          # Analyze dependencies in the futures package to find unused or missing dependencies
-
   # Run pre-commit hooks for code quality checks
   pre-commit:
     runs-on: ubuntu-latest

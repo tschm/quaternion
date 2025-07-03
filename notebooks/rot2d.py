@@ -44,7 +44,7 @@ def _():
     mo.md(
         r"""
     ## Rotationen in 2D
-    * Wie rotieren wir z.B. ein Polygon?
+    * Wie rotieren wir z.B. in Polygon?
     * Wann ist eine lineare Abbildung eine Rotation?
     * Rotationsmatrizen und komplexe Zahlen.
     * Hoffnung für 3D?
@@ -79,10 +79,10 @@ def pp(ax, point, **kwargs):
 
 @app.function
 def baseimage(a1, a2):
-    fig = plt.figure(figsize=(6,6))
-    ax = fig.add_subplot(111, aspect='equal')
-    pp(ax, point=np.array([1,0]), color="b", linewidth=5)
-    pp(ax, point=np.array([0,1]), color="r", linewidth=5)
+    fig = plt.figure(figsize=(6, 6))
+    ax = fig.add_subplot(111, aspect="equal")
+    pp(ax, point=np.array([1, 0]), color="b", linewidth=5)
+    pp(ax, point=np.array([0, 1]), color="r", linewidth=5)
     pp(ax, point=np.array(a1), color="b", linewidth=5, linestyle="--")
     pp(ax, point=np.array(a2), color="r", linewidth=5, linestyle="--")
     plt.grid()
@@ -130,11 +130,11 @@ def _():
         r"""
     ### Die Gruppe $\textrm{SO}(2)$
 
-    * Spalten von A müssen orthonormal sein und $\det(\mathbf{A}) = 1$. 
+    * Spalten von A müssen orthonormal sein und $\det(\mathbf{A}) = 1$.
 
     * Teste mit $\lVert\mathbf{A}^{T}\mathbf{A} - \mathbf{I}\rVert < \varepsilon$ und expliziter Berechnung von $\det(\mathbf{A})$.
 
-    * Diese Matrizen bilden eine Gruppe (bzgl. der Multiplikation). $\mathbf{A}_1, \mathbf{A}_2 \in \textrm{SO}(2)$ dann gilt $\mathbf{A}_1 \mathbf{A}_2 \in \textrm{SO}(2)$.
+    * Diese Matrizen bilden eine Gruppe (bzgl. der Multiplication). $\mathbf{A}_1, \mathbf{A}_2 \in \textrm{SO}(2)$ dann gilt $\mathbf{A}_1 \mathbf{A}_2 \in \textrm{SO}(2)$.
 
     ### Die Rotationen in 2D sind die Elemente von $\textrm{SO}(2)$.
     """
@@ -146,9 +146,9 @@ def _():
 def _():
     mo.md(
         r"""
-    ### Komplexe (Einheits-)Zahlen als Rotation
-    Wir können aber auch jeden Punkt $(a,b) \in \mathbb{R}^2$ mit der komplexen Zahl $z=a+i b$ eindeutig identifizieren. 
-    Die Drehung um den Winkel $\varphi$ entspricht dann einfach einer komplexen Multiplikation 
+    ### Komplexe (Einheits-)Zahlen also Rotation
+    Wir können aber auch jeden Punkt $(a,b) \in \mathbb{R}^2$ mit der komplexen Zahl $z=a+i b$ eindeutig identifizieren.
+    Die Drehung um den Winkel $\varphi$ entspricht dann einfach einer komplexen Multiplication
     \\[
     u z = z u
     \\]
@@ -156,7 +156,7 @@ def _():
 
     $\textrm{SO}(2)$ eng verwandt mit den komplexen Zahlen auf der Einheitssphäre (der Rand der Einheitsscheibe).
 
-    ### Komplexe Zahlen einfacher als Rotationsmatrizen, aber Schritt in höhere Dimensionen unklar.
+    ### Komplexe Zahlen einfacher also Rotationsmatrizen, aber Schritt in höhere Dimensionen unklar.
     """
     )
     return
@@ -164,11 +164,11 @@ def _():
 
 @app.cell
 def _():
-    fig = plt.figure(figsize=(6,6))
-    ax = fig.add_subplot(111, aspect='equal')
-    pp(ax, point=np.array([1,2]), color="b", linewidth=5)
-    pp(ax, point=np.array([0,1]), color="r", linewidth=5)
-    pp(ax, point=np.array([-2,1]), color="b", linewidth=5, linestyle="--")
+    fig = plt.figure(figsize=(6, 6))
+    ax = fig.add_subplot(111, aspect="equal")
+    pp(ax, point=np.array([1, 2]), color="b", linewidth=5)
+    pp(ax, point=np.array([0, 1]), color="r", linewidth=5)
+    pp(ax, point=np.array([-2, 1]), color="b", linewidth=5, linestyle="--")
     plt.grid()
     plt.show()
     # z=1+2i
@@ -198,24 +198,22 @@ def _():
     mo.md(
         r"""
     ### Animationen in 2D?
-    * Wir drehen Punkte $z = x +i y$ um den Winkel $\varphi$. 
+    * Wir drehen Punkte $z = x +i y$ um den Winkel $\varphi$.
     * Wir interpolieren diese Drehung mittels $\varphi(t) = \frac{t}{T}\phi$.
-    * Die Animiation ist dann einfach 
+    * Die Animiation ist dann einfach
     \\[
     z(t) = (\cos(\varphi(t)) + i\sin(\varphi(t))) z(0)
     \\]
-    * Eine Animation ist hier nur eine Hintereinanderausführung vieler, vieler Rotationen. 
+    * Eine Animation ist hier nur eine Hintereinanderausführung vieler, vieler Rotationen.
     * Gleichmässige Winkelgeschwindigkeit impliziert weniger **Ruckeln**.
     """
     )
     return
 
 
-@app.cell
-def _(cos, sin):
-    def so2(phi):
-        return np.array([[cos(_phi), -sin(_phi)], [sin(_phi), cos(_phi)]])
-    return (so2,)
+@app.function
+def so2(_phi):
+    return np.array([[np.cos(_phi), -np.sin(_phi)], [np.sin(_phi), np.cos(_phi)]])
 
 
 @app.cell(hide_code=True)
@@ -223,12 +221,12 @@ def _():
     mo.md(
         r"""
     Kurzes Quiz
-    * Eine Drehung in 2D stellen wir als Rotationsmatrix oder komplexe (Einheits)Zahl dar.
+    * Eine Drehung in 2D stellen wir also Rotationsmatrix oder komplexe (Einheits)Zahl dar.
     * Was gilt für die Spalten einer solchen Rotationsmatrix?
     * Was gilt für die Determinante einer solchen Matrix?
     * Wie testet man die Orthonormalität einer Matrix?
     * Schreiben Sie eine Klasse, die eine Rotation in 2D beschreibt.
-    * Multiplizieren Sie 10000 zufällig gewählte Rotationsmatrizen und untersuchen Sie, ob das Produkt auch wirklich eine Rotationsmatrix ist.
+    * Multiplizieren Sie 10000 zufällig gewählte Rotationsmatrizen und untersuchen Sie, ob das Product auch wirklich eine Rotationsmatrix ist.
 
     Der Zugang via Matrizen öffnet den Weg in alle höheren Dimensionen, $\textrm{SO}(3)$, $\textrm{SO}(4)$, ...
     Der Zugang via komplexer Zahlen erleichtert das Verständnis für Quaterionen.
@@ -244,9 +242,10 @@ def _(so2):
     _A = so2(np.pi / 6)
     print(_A)
     from numpy.linalg import eig
-    print('Eigenvalues: ')
+
+    print("Eigenvalues: ")
     print(eig(_A)[0])
-    print('Eigenvectors (columns): ')
+    print("Eigenvectors (columns): ")
     print(eig(_A)[1])
     return
 
@@ -254,6 +253,7 @@ def _(so2):
 @app.cell
 def _(so2):
     from np.random import rand
+
     _A = np.eye(2)
     for r in rand(10000):
         _A = np.dot(so2(r), _A)

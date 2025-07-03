@@ -372,7 +372,9 @@ def _():
 
 @app.cell(hide_code=True)
 def _():
-    mo.md(r"""Sie fliegen von Biel direkt zum Nordpol. Was ist Ihr Längengrad? Sie überfliegen den Nordpol und nehmen geradeaus Kurs auf Hawaii... Sie zeichnen den Längengrad auf. Was passiert am Nordpol?""")
+    mo.md(
+        r"""Sie fliegen von Biel direkt zum Nordpol. Was ist Ihr Längengrad? Sie überfliegen den Nordpol und nehmen geradeaus Kurs auf Hawaii... Sie zeichnen den Längengrad auf. Was passiert am Nordpol?"""
+    )
     return
 
 

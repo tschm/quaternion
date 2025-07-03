@@ -203,11 +203,11 @@ def _():
     * Wir drehen Punkte $z = x +i y$ um den Winkel $\varphi$.
     * Wir interpolieren diese Drehung mittels $\varphi(t) = \frac{t}{T}\phi$.
     * Die Animiation ist dann einfach
-    
+
     \[
     z(t) = (\cos(\varphi(t)) + i\sin(\varphi(t))) z(0)
     \]
-    
+
     * Eine Animation ist hier nur eine Hintereinanderausführung vieler, vieler Rotationen.
     * Gleichmässige Winkelgeschwindigkeit impliziert weniger **Ruckeln**.
     """
@@ -225,7 +225,7 @@ def _():
     mo.md(
         r"""
     Kurzes Quiz
-    
+
     * Eine Drehung in 2D stellen wir also Rotationsmatrix oder komplexe (Einheits)Zahl dar.
     * Was gilt für die Spalten einer solchen Rotationsmatrix?
     * Was gilt für die Determinante einer solchen Matrix?

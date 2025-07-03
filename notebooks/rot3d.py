@@ -10,7 +10,7 @@
 
 import marimo
 
-__generated_with = "0.14.10"
+__generated_with = "0.14.9"
 app = marimo.App()
 
 with app.setup:
@@ -22,14 +22,7 @@ with app.setup:
 
 @app.cell(hide_code=True)
 def _():
-    mo.md(
-        r"""
-        # Rotationen in 3D
-
-
-
-        """
-    )
+    mo.md(r"""# Rotationen in 3D""")
     return
 
 
@@ -37,11 +30,11 @@ def _():
 def _():
     mo.md(
         r"""
-        ## Rotationen in 3D
-        * Die Rotationsmatrizen $\textrm{SO}(3)$
-        * Die Eulerachse
-        * Die Quaternionen
-        """
+    ## Rotationen in 3D
+    * Die Rotationsmatrizen $\textrm{SO}(3)$
+    * Die Eulerachse
+    * Die Quaternionen
+    """
     )
     return
 
@@ -55,13 +48,12 @@ def pp(ax, point, **kwargs):
 def _():
     mo.md(
         r"""
-        ## Rotationsmatrizen $\textrm{SO}(3)$
+    ## Rotationsmatrizen $\textrm{SO}(3)$
 
-        $3 \times 3$ Matrizen, orthonormale Spalten und $\det(A) = 1$.
+    $3 \times 3$ Matrizen, orthonormale Spalten und $\det(A) = 1$.
 
-        Fertig? Matrizen manchmal etwas unhandlich. $9$ Einträge, Fragen der Stabilität?
-
-        """
+    Fertig? Matrizen manchmal etwas unhandlich. $9$ Einträge, Fragen der Stabilität?
+    """
     )
     return
 
@@ -110,14 +102,14 @@ def _():
 def _():
     mo.md(
         r"""
-        * Es gibt immer einen Eigenwert 1
-        * Eine reelle 3 x 3 Matrix hat immer mind. einen reellen Eigenwert
-        * Das charakteristische Polynom einer 3x3 Matrix hat den Grad 3.
-        * In Polynom vom Grad 3 hat mind eine reelle Nullstelle (das ist nicht wahr fuer Polynome vom Grad 2,4,6,...)
-        * Was können Sie über die beiden anderen Eigenwerte sagen?
-        * Was können Sie über das Product der Eigenwerte sagen?
-        * Was bedeutet es geometrisch so einen Eigenwert zu haben?
-        """
+    * Es gibt immer einen Eigenwert 1
+    * Eine reelle 3 x 3 Matrix hat immer mind. einen reellen Eigenwert
+    * Das charakteristische Polynom einer 3x3 Matrix hat den Grad 3.
+    * In Polynom vom Grad 3 hat mind eine reelle Nullstelle (das ist nicht wahr fuer Polynome vom Grad 2,4,6,...)
+    * Was können Sie über die beiden anderen Eigenwerte sagen?
+    * Was können Sie über das Product der Eigenwerte sagen?
+    * Was bedeutet es geometrisch so einen Eigenwert zu haben?
+    """
     )
     return
 
@@ -126,33 +118,27 @@ def _():
 def _():
     mo.md(
         r"""
-        ## Beobachtungen
-        * Es existiert in Vector x (reell), so dass A*x = x. Diese Vector beschreibt die __Euler Achse__
-        * Die beiden anderen Eigenwerte sind $z$ und $\bar{z}$.
-        * $A*x=x$ ist auch die Gleichung für die stationäre Verteilung einer Markovkette. $A$ ist dann die Transition Matrix.
-        """
+    ## Beobachtungen
+    * Es existiert in Vector x (reell), so dass A*x = x. Diese Vector beschreibt die __Euler Achse__
+    * Die beiden anderen Eigenwerte sind $z$ und $\bar{z}$.
+    * $A*x=x$ ist auch die Gleichung für die stationäre Verteilung einer Markovkette. $A$ ist dann die Transition Matrix.
+    """
     )
     return
-
-
-# @app.cell
-# def _():
-#    Image("Euler_AxisAngle.png")
-#    return
 
 
 @app.cell(hide_code=True)
 def _():
     mo.md(
         r"""
-        Jede Rotation in 3d ist also eine 2d Drehung um die Euler Achse.
-        Eine solche Achse existiert immer!
+    Jede Rotation in 3d ist also eine 2d Drehung um die Euler Achse.
+    Eine solche Achse existiert immer!
 
-        Punkte auf der Euler Achse bleiben unverändert.
-        Jeder Punkt liegt in einer Ebene orthogonal zur Euler Achse und bleibt auch nach der Rotation in dieser Ebene.
+    Punkte auf der Euler Achse bleiben unverändert.
+    Jeder Punkt liegt in einer Ebene orthogonal zur Euler Achse und bleibt auch nach der Rotation in dieser Ebene.
 
-        Die Berechnung der Euler Achse und des Drehwinkels $\varphi$ ist etwas technisch (ergo Hausaufgabe).
-        """
+    Die Berechnung der Euler Achse und des Drehwinkels $\varphi$ ist etwas technisch (ergo Hausaufgabe).
+    """
     )
     return
 
@@ -201,31 +187,38 @@ def _():
 def _():
     mo.md(
         r"""
-        * Die Idee ist es die Rotation also Paar aus Achse $(x_1, x_2, x_3)$ mit $x_1^2 + x_2^2 + x_3^2=1$ und Winkel $\varphi$ anzugeben. Das schaffen wir eben genau mit den Quaternionen uns insbesondere den Versoren:
-        \\[
-        q = \cos(\varphi/2) + \sin(\varphi/2) (ix_1 + jx_2 + kx_3)
-        \\]
-        * In Vector $x \in \mathbb{R}^3$ kann mit der reinen Quaternion
-        \\[
-        x_r = ix_1 + jx_2 + kx_3
-        \\]
-        identifiziert werden.
-        * Die Multiplication der Quaternionen folgt
-        \\[
-        i^2 = j^2 = k^2 = ijk = -1
-        \\]
-        * Die Rotation ist dann der vektorwertige Teil der Quaternion
-        \\[
-        x' = q x_r \bar{q}
-        \\]
+    * Die Idee ist es die Rotation also Paar aus Achse $(x_1, x_2, x_3)$ mit $x_1^2 + x_2^2 + x_3^2=1$ und Winkel $\varphi$ anzugeben. Das schaffen wir eben genau mit den Quaternionen uns insbesondere den Versoren:
 
-        """
+    \[
+    q = \cos(\varphi/2) + \sin(\varphi/2) (ix_1 + jx_2 + kx_3)
+    \]
+
+    * In Vector $x \in \mathbb{R}^3$ kann mit der reinen Quaternion
+
+    \[
+    x_r = ix_1 + jx_2 + kx_3
+    \]
+
+    identifiziert werden.
+
+    * Die Multiplikation der Quaternionen folgt
+
+    \[
+    i^2 = j^2 = k^2 = ijk = -1
+    \]
+
+    * Die Rotation ist dann der vektorwertige Teil der Quaternion
+
+    \[
+    x' = q x_r \bar{q}
+    \]
+    """
     )
     return
 
 
 @app.cell
-def _(euler, np):
+def _(euler):
     def fromSO3(A):
         axis, angle = euler(A)
         vector = np.sin(angle / 2) * axis
@@ -315,7 +308,7 @@ def _():
 
 
 @app.cell
-def _(A_2, fromSO3, fromSO3_fast, np):
+def _(A_2, fromSO3, fromSO3_fast):
     q1 = fromSO3(A_2)
     q2 = fromSO3_fast(A_2)
     print(q1)
@@ -350,14 +343,14 @@ def _(A_2, q2):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
-        ## Aber warum?
-        * Die Rotation von (vielen) Punkten mittels Quaternionen ist verglichen mit Rotationsmatrizen teuer.
-        * Interessanter für Rotationen von Rotationen, numerisch stabiler...
-        * Interpolation von Quaternionen (SLERP)...
-        """
+    ## Aber warum?
+    * Die Rotation von (vielen) Punkten mittels Quaternionen ist verglichen mit Rotationsmatrizen teuer.
+    * Interessanter für Rotationen von Rotationen, numerisch stabiler...
+    * Interpolation von Quaternionen (SLERP)...
+    """
     )
     return
 
@@ -366,15 +359,41 @@ def _(mo):
 def _():
     mo.md(
         r"""
-        ## Alternative Representations of SO(3)
-        siehe https://github.com/moble/quaternion
+    ## Alternative Representations of SO(3)
+    siehe https://github.com/moble/quaternion
 
-        Euler angles are pretty much the worst things ever and it makes me feel bad even supporting them. Quaternions are faster, more accurate, basically free of singularities, more intuitive, and generally easier to understand. You can work entirely without Euler angles (I certainly do). You absolutely never need them.
+    Euler angles are pretty much the worst things ever and it makes me feel bad even supporting them. Quaternions are faster, more accurate, basically free of singularities, more intuitive, and generally easier to understand. You can work entirely without Euler angles (I certainly do). You absolutely never need them.
 
-        Es gibt viele mögliche Representations der Element von SO(3). Siehe https://en.wikipedia.org/wiki/Charts_on_SO(3)
+    Es gibt viele mögliche Representations der Element von SO(3). Siehe https://en.wikipedia.org/wiki/Charts_on_SO(3)
+    """
+    )
+    return
 
 
-        """
+@app.cell(hide_code=True)
+def _():
+    mo.md(r"""Sie fliegen von Biel direkt zum Nordpol. Was ist Ihr Längengrad? Sie überfliegen den Nordpol und nehmen geradeaus Kurs auf Hawaii... Sie zeichnen den Längengrad auf. Was passiert am Nordpol?""")
+    return
+
+
+@app.cell(hide_code=True)
+def _():
+    mo.md(
+        r"""
+    ### SLERP (interpolation of two quarterions)
+
+    * special case: $q_0 = 1$, $q_1 = q = \cos(\theta) + \sin(\theta)\mathbf{v}$ (Polarform)
+
+    \\[
+    SLERP(1, q, t) = q^t = \cos(t\theta) + \sin(t\theta)\mathbf{v}
+    \\]
+
+    * normal case: $q_0$ and $q_1$ both unit quaternions:
+
+    \\[
+    SLERP(q_0, q_1, t) = (q_1 q_0^{-1})^t q_0
+    \\]
+    """
     )
     return
 
@@ -383,8 +402,11 @@ def _():
 def _():
     mo.md(
         r"""
-        Sie fliegen von Biel direkt zum Nordpol. Was ist Ihr Längengrad? Sie überfliegen den Nordpol und nehmen geradeaus Kurs auf Hawaii... Sie zeichnen den Längengrad auf. Was passiert am Nordpol?
-        """
+    ## Zusammenfassung 1:
+    * Komplexe Zahlen eng verwandt mit den Rotationsmatrizen SO(2).
+    * Quaternionen eng verwandt mit den Rotationsmatrizen SO(3).
+    * SO(2) eng verwandt mit SO(3), also Komplexe Zahlen eng verwandt mit Quaternionen.
+    """
     )
     return
 
@@ -393,23 +415,11 @@ def _():
 def _():
     mo.md(
         r"""
-        ### SLERP (interpolation of two quarterions)
-
-        * special case: $q_0 = 1$, $q_1 = q = \cos(\theta) + \sin(\theta)\mathbf{v}$ (Polarform)
-
-        \\[
-        SLERP(1, q, t) = q^t = \cos(t\theta) + \sin(t\theta)\mathbf{v}
-        \\]
-
-        * normal case: $q_0$ and $q_1$ both unit quaternions:
-
-        \\[
-        SLERP(q_0, q_1, t) = (q_1 q_0^{-1})^t q_0
-        \\]
-
-
-
-        """
+    ## Zusammenfassung 2:
+    * Eine Rotation in 3D ist immer eine Rotation um eine feste Euler-Achse.
+    * Die Euler-Achse ist der Eigenvektor (zum Eigenwert 1.0) einer Matrix aus SO(3).
+    * Die Euler-Achse beschreibt den vektorwertigen Anteil der Quaternion.
+    """
     )
     return
 
@@ -418,11 +428,11 @@ def _():
 def _():
     mo.md(
         r"""
-        ## Zusammenfassung 1:
-        * Komplexe Zahlen eng verwandt mit den Rotationsmatrizen SO(2).
-        * Quaternionen eng verwandt mit den Rotationsmatrizen SO(3).
-        * SO(2) eng verwandt mit SO(3), also Komplexe Zahlen eng verwandt mit Quaternionen.
-        """
+    ## Zusammenfassung 3:
+    * Quarternionen insbesondere hilfreich bei vielen Rotationen weniger Punkte.
+    * Rotationsmatrizen hilfreich bei wenigen Rotationen vieler Punkte.
+    * Glückliches Leben auch ohne Quaternionen möglich, unmöglich aber ohne Lineare Algebra und Komplexe Zahlen.
+    """
     )
     return
 
@@ -431,51 +441,17 @@ def _():
 def _():
     mo.md(
         r"""
-        ## Zusammenfassung 2:
-        * Eine Rotation in 3D ist immer eine Rotation um eine feste Euler-Achse.
-        * Die Euler-Achse ist der Eigenvektor (zum Eigenwert 1.0) einer Matrix aus SO(3).
-        * Die Euler-Achse beschreibt den vektorwertigen Anteil der Quaternion.
-        """
+    ## Hausaufgaben:
+    * Wie weit ist es von Biel nach Sydney
+    * Sie leben in Biel. Sie hätten gerne mehr Sonne und weniger Nebel. Drehen Sie deshalb Biel nach Nizza. Hinweis: Drehen Sie um die Achse, die senkrecht auf der Ebene Biel-Nizza-Erdmittelpunkt steht.
+    * Erweitern Sie die Python Klasse um eine Method SLERP.
+    * Wer war Olinde Rodrigues? Die Method so3 in der Klasse Quaternion ist nicht wirklich optimal. Schlagen Sie eine Alternative vor...
+    * Beweisen Sie, dass alle Eigenwerte einer orthonormalen Matrix Betrag $1$ haben.
+    * Beweisen Sie, dass jede Matrix aus SO(5) eine Euler-Achse hat.
+    * Sei $p$ in Polynom mit ungeradem Grad. Beweisen Sie, dass es mind. eine reelle Nullstelle hat.
+    """
     )
     return
-
-
-@app.cell(hide_code=True)
-def _():
-    mo.md(
-        r"""
-        ## Zusammenfassung 3:
-        * Quarternionen insbesondere hilfreich bei vielen Rotationen weniger Punkte.
-        * Rotationsmatrizen hilfreich bei wenigen Rotationen vieler Punkte.
-        * Glückliches Leben auch ohne Quaternionen möglich, unmöglich aber ohne Lineare Algebra und Komplexe Zahlen.
-        """
-    )
-    return
-
-
-@app.cell(hide_code=True)
-def _():
-    mo.md(
-        r"""
-        ## Hausaufgaben:
-        * Wie weit ist es von Biel nach Sydney
-        * Sie leben in Biel. Sie hätten gerne mehr Sonne und weniger Nebel. Drehen Sie deshalb Biel nach Nizza. Hinweis: Drehen Sie um die Achse, die senkrecht auf der Ebene Biel-Nizza-Erdmittelpunkt steht.
-        * Erweitern Sie die Python Klasse um eine Method SLERP.
-        * Wer war Olinde Rodrigues? Die Method so3 in der Klasse Quaternion ist nicht wirklich optimal. Schlagen Sie eine Alternative vor...
-        * Beweisen Sie, dass alle Eigenwerte einer orthonormalen Matrix Betrag $1$ haben.
-        * Beweisen Sie, dass jede Matrix aus SO(5) eine Euler-Achse hat.
-        * Sei $p$ in Polynom mit ungeradem Grad. Beweisen Sie, dass es mind. eine reelle Nullstelle hat.
-
-        """
-    )
-    return
-
-
-@app.cell
-def _():
-    import marimo as mo
-
-    return (mo,)
 
 
 if __name__ == "__main__":

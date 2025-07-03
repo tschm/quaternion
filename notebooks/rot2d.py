@@ -11,12 +11,14 @@
 import marimo
 
 __generated_with = "0.14.9"
-app = marimo.App()
+app = marimo.App(layout_file="layouts/rot2d.slides.json")
 
 with app.setup:
     import marimo as mo
     import numpy as np
     import matplotlib.pyplot as plt
+    from numpy.linalg import eig
+    from numpy.random import rand
 
 
 @app.cell(hide_code=True)
@@ -201,9 +203,11 @@ def _():
     * Wir drehen Punkte $z = x +i y$ um den Winkel $\varphi$.
     * Wir interpolieren diese Drehung mittels $\varphi(t) = \frac{t}{T}\phi$.
     * Die Animiation ist dann einfach
-    \\[
+    
+    \[
     z(t) = (\cos(\varphi(t)) + i\sin(\varphi(t))) z(0)
-    \\]
+    \]
+    
     * Eine Animation ist hier nur eine Hintereinanderausführung vieler, vieler Rotationen.
     * Gleichmässige Winkelgeschwindigkeit impliziert weniger **Ruckeln**.
     """
@@ -221,6 +225,7 @@ def _():
     mo.md(
         r"""
     Kurzes Quiz
+    
     * Eine Drehung in 2D stellen wir also Rotationsmatrix oder komplexe (Einheits)Zahl dar.
     * Was gilt für die Spalten einer solchen Rotationsmatrix?
     * Was gilt für die Determinante einer solchen Matrix?
@@ -238,11 +243,9 @@ def _():
 
 
 @app.cell
-def _(so2):
+def _():
     _A = so2(np.pi / 6)
     print(_A)
-    from numpy.linalg import eig
-
     print("Eigenvalues: ")
     print(eig(_A)[0])
     print("Eigenvectors (columns): ")
@@ -251,9 +254,7 @@ def _(so2):
 
 
 @app.cell
-def _(so2):
-    from np.random import rand
-
+def _():
     _A = np.eye(2)
     for r in rand(10000):
         _A = np.dot(so2(r), _A)

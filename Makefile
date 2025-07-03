@@ -5,7 +5,7 @@ RESET := \033[0m
 
 .DEFAULT_GOAL := uv
 
-.PHONY: uv fmt marimo
+.PHONY: uv fmt 2d 3d
 
 ##@ Development Setup
 
@@ -18,6 +18,10 @@ fmt: uv ## Run autoformatting and linting
 	# Run all pre-commit hooks on all files
 	@uvx pre-commit run --all-files
 
-marimo: uv ## Start a Marimo server
+2d: uv ## Start a Marimo server
 	@printf "$(BLUE)Start Marimo server...$(RESET)\n"
 	@uvx marimo edit --sandbox notebooks/rot2d.py
+
+3d: uv ## Start a Marimo server
+	@printf "$(BLUE)Start Marimo server...$(RESET)\n"
+	@uvx marimo edit --sandbox notebooks/rot3d.py

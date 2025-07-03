@@ -1,11 +1,27 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "marimo==0.14.9",
+#     "pandas==2.3.0",
+#     "numpy==2.3.1",
+#     "matplotlib==3.10.0",
+# ]
+# ///
+
 import marimo
 
 __generated_with = "0.14.10"
 app = marimo.App()
 
+with app.setup:
+    import marimo as mo
+    import numpy as np
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    from numpy.linalg import eig
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         # Rotationen in 3D
@@ -18,7 +34,7 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         ## Rotationen in 3D
@@ -30,16 +46,13 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    import matplotlib.pyplot as plt
-    def pp(ax, point, **kwargs):
-        ax.plot([0, point[0]], [0,point[1]], [0, point[2]], **kwargs)
-    return
+@app.function
+def pp(ax, point, **kwargs):
+    ax.plot([0, point[0]], [0,point[1]], [0, point[2]], **kwargs)
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         ## Rotationsmatrizen $\textrm{SO}(3)$
@@ -52,38 +65,27 @@ def _(mo):
     )
     return
 
-
-@app.cell
-def _():
-    # construct a random SO(3) matrix
-
-    import numpy as np
-
+@app.function
+def rand_so3():
     # We construct a random element in SO(3)
-    def rand_so3():
-        A = np.random.randn(3,3)
-        # normalize the first column
-        A[:,0]=A[:,0]/np.linalg.norm(A[:,0], 2)
-        # make the 2nd column orthogonal to first column
-        A[:,1]=A[:,1] - np.dot(A[:,0], A[:,1])*A[:,0]
-        # normalize the second column
-        A[:,1]=A[:,1]/np.linalg.norm(A[:,1], 2)
-        # The third column is just the cross product of the first two columns => det = 1
-        A[:,2]=np.cross(A[:,0],A[:,1])
-        return A
+    A = np.random.randn(3,3)
+    # normalize the first column
+    A[:,0]=A[:,0]/np.linalg.norm(A[:,0], 2)
+    # make the 2nd column orthogonal to first column
+    A[:,1]=A[:,1] - np.dot(A[:,0], A[:,1])*A[:,0]
+    # normalize the second column
+    A[:,1]=A[:,1]/np.linalg.norm(A[:,1], 2)
+    # The third column is just the cross product of the first two columns => det = 1
+    A[:,2]=np.cross(A[:,0],A[:,1])
 
-    A = rand_so3()
     print("Determinante von A: {0}".format(np.linalg.det(A)))
     print("Check if columns are orthonormal")
     print(np.linalg.norm(np.dot(A.T,A)-np.eye(3),'fro'))
-    return np, rand_so3
+    return A
 
 
 @app.cell
-def _(np, rand_so3):
-    from numpy.linalg import eig
-    import pandas as pd
-
+def _():
     for i in range(0,3):
         values, vectors = eig(rand_so3())
         d = dict()
@@ -96,7 +98,7 @@ def _(np, rand_so3):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         * Es gibt immer einen Eigenwert 1
@@ -112,7 +114,7 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         ## Beobachtungen
@@ -124,15 +126,14 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    from IPython.display import Image
-    Image("Euler_AxisAngle.png")
-    return
+#@app.cell
+#def _():
+#    Image("Euler_AxisAngle.png")
+#    return
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         Jede Rotation in 3d ist also eine 2d Drehung um die Euler Achse. 
@@ -162,7 +163,7 @@ def _():
 
 
 @app.cell
-def _(np, rand_so3):
+def _():
     A_1 = rand_so3()
 
     def euler(A, eps=1e-10):
@@ -183,7 +184,7 @@ def _(np, rand_so3):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         * Die Idee ist es die Rotation als Paar aus Achse $(x_1, x_2, x_3)$ mit $x_1^2 + x_2^2 + x_3^2=1$ und Winkel $\varphi$ anzugeben. Das schaffen wir eben genau mit den Quaternionen uns insbesondere den Versoren:
@@ -287,7 +288,7 @@ def _(euler, np):
 
 
 @app.cell
-def _(np, rand_so3):
+def _():
     A_2 = rand_so3()
     print(A_2)
     print(np.linalg.det(A_2))
@@ -344,7 +345,7 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         ## Alternative Representations of SO(3)
@@ -361,7 +362,7 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         Sie fliegen von Biel direkt zum Nordpol. Was ist Ihr Längengrad? Sie überfliegen den Nordpol und nehmen geradeaus Kurs auf Hawaii... Sie zeichnen den Längengrad auf. Was passiert am Nordpol?
@@ -371,7 +372,7 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         ### SLERP (interpolation of two quarterions)
@@ -396,7 +397,7 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         ## Zusammenfassung 1:
@@ -409,7 +410,7 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         ## Zusammenfassung 2:
@@ -422,7 +423,7 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         ## Zusammenfassung 3:
@@ -435,7 +436,7 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
         ## Hausaufgaben:

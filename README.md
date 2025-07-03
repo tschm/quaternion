@@ -1,3 +1,3 @@
 # [Quaternion](http://tschm.github.io/quaternion)
 
-Lecture about quaternions
+Lecture about quaternions. Based on lecture I gave once at Biel.

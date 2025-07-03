@@ -13,3 +13,7 @@ uv:
 	@printf "$(BLUE)Creating virtual environment...$(RESET)\n"
 	@curl -LsSf https://astral.sh/uv/install.sh | sh
 
+
+marimo: uv ## Start a Marimo server
+	@printf "$(BLUE)Start Marimo server...$(RESET)\n"
+	@uvx marimo edit --sandbox notebooks/rot2d.py
